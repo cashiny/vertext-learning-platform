@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { Bell } from "lucide-react";
+import { SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
+import { Button } from "@/app/components/ui/Button";
 
-interface NavbarProps {
-  userInitials?: string;
-}
-
-export function Navbar({ userInitials }: NavbarProps) {
+export function Navbar() {
   return (
     <nav className="flex h-16 items-center justify-between border-b border-neutral-200 bg-white px-8">
       <Link href="/" className="flex items-center gap-2">
@@ -32,9 +30,17 @@ export function Navbar({ userInitials }: NavbarProps) {
         >
           <Bell size={20} />
         </button>
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-100 font-sans text-xs font-semibold text-primary-500">
-          {userInitials ?? "V"}
-        </span>
+        <Show when="signed-out">
+          <SignInButton mode="modal">
+            <Button variant="text">Sign in</Button>
+          </SignInButton>
+          <SignUpButton mode="modal">
+            <Button variant="primary">Sign up</Button>
+          </SignUpButton>
+        </Show>
+        <Show when="signed-in">
+          <UserButton />
+        </Show>
       </div>
     </nav>
   );
