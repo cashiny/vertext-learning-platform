@@ -7,6 +7,7 @@ interface CourseCardProps {
   level: string;
   duration: string;
   moduleCount: number;
+  iconBgClassName?: string;
 }
 
 export function CourseCard({
@@ -16,11 +17,14 @@ export function CourseCard({
   level,
   duration,
   moduleCount,
+  iconBgClassName = "bg-neutral-900 text-white",
 }: CourseCardProps) {
   return (
     <div className="flex flex-col gap-4 rounded-lg border border-neutral-200 bg-white p-5 shadow-sm">
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-neutral-900 text-white">
+        <div
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-sm ${iconBgClassName}`}
+        >
           {icon}
         </div>
         <h3 className="font-sans text-[18px] font-semibold leading-[26px] text-neutral-900">
