@@ -1,6 +1,11 @@
 import Link from "next/link";
+import { Bell } from "lucide-react";
 
-export function Navbar() {
+interface NavbarProps {
+  userInitials?: string;
+}
+
+export function Navbar({ userInitials }: NavbarProps) {
   return (
     <nav className="flex h-16 items-center justify-between border-b border-neutral-200 bg-white px-8">
       <Link href="/" className="flex items-center gap-2">
@@ -18,6 +23,18 @@ export function Navbar() {
         <Link href="/my-learning" className="hover:text-neutral-900">
           My Learning
         </Link>
+      </div>
+      <div className="flex items-center gap-4">
+        <button
+          type="button"
+          aria-label="Notifications"
+          className="text-neutral-500 hover:text-neutral-900"
+        >
+          <Bell size={20} />
+        </button>
+        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-100 font-sans text-xs font-semibold text-primary-500">
+          {userInitials ?? "V"}
+        </span>
       </div>
     </nav>
   );
